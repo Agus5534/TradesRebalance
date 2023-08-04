@@ -4,16 +4,15 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
-import org.jetbrains.annotations.Nullable;
 
 public class VillagerTrade {
 
     private final ItemStack item;
     private final int priceMin, priceMax;
-    private @Nullable Integer bookLevel;
+    private Integer bookLevel;
     private final boolean special;
 
-    private VillagerTrade(ItemStack item, int priceMin, int priceMax, boolean special, @Nullable Integer bookLevel) {
+    private VillagerTrade(ItemStack item, int priceMin, int priceMax, boolean special, Integer bookLevel) {
         this.item = item;
         this.priceMin = priceMin;
         this.priceMax = priceMax;
@@ -37,7 +36,7 @@ public class VillagerTrade {
         return special;
     }
 
-    public @Nullable Integer bookLevel() {
+    public Integer bookLevel() {
         return bookLevel;
     }
 

@@ -43,7 +43,7 @@ public class VillagerListener implements Listener {
         var trade = typeManager.getSpecialTrade();
 
         var cost = ThreadLocalRandom.current().nextInt(trade.min(), trade.max());
-        var rec = new MerchantRecipe(trade.item(), recipe.getUses(), recipe.getMaxUses(), recipe.hasExperienceReward(), recipe.getVillagerExperience(), recipe.getPriceMultiplier(), recipe.shouldIgnoreDiscounts());
+        var rec = new MerchantRecipe(trade.item(), recipe.getUses(), recipe.getMaxUses(), recipe.hasExperienceReward(), recipe.getVillagerExperience(), recipe.getPriceMultiplier());
         rec.setIngredients(
                 List.of
                         (
@@ -75,7 +75,7 @@ public class VillagerListener implements Listener {
 
         var randBook = typeManager.getRandomTrade();
         var cost = ThreadLocalRandom.current().nextInt(randBook.min(), randBook.max());
-        var rec = new MerchantRecipe(randBook.item(), recipe.getUses(), recipe.getMaxUses(), recipe.hasExperienceReward(), recipe.getVillagerExperience(), recipe.getPriceMultiplier(), recipe.shouldIgnoreDiscounts());
+        var rec = new MerchantRecipe(randBook.item(), recipe.getUses(), recipe.getMaxUses(), recipe.hasExperienceReward(), recipe.getVillagerExperience(), recipe.getPriceMultiplier());
         rec.setIngredients(
                 List.of(
                         new ItemStack(Material.EMERALD, cost),
