@@ -1,0 +1,7 @@
+name: TradesRebalance
+version: '${version}'
+main: io.github.agus5534.tradesrebalance.TradesRebalance
+api-version: '1.17'
+prefix: TradesRebalance
+authors: [Agus5534]
+description: A plugin that replicates Minecraft 23w31a librarian villagers nerf
