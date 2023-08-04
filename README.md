@@ -3,7 +3,7 @@ A plugin that replicates [Minecraft 23w31a](https://www.minecraft.net/en-us/arti
 
 Valid from Minecraft 1.17 to latest release.
 
-Uses Paper software.
+Uses Spigot software.
 
 ## To Do List
 - [X] Librarians updated
