@@ -2,6 +2,7 @@ package io.github.agus5534.tradesrebalance.listeners;
 
 import io.github.agus5534.tradesrebalance.villager.trades.TradesManager;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,6 +25,10 @@ public class VillagerListener implements Listener {
 
     @EventHandler
     public void onAcquireTrade(VillagerAcquireTradeEvent event) {
+        if(event.getEntityType().equals(EntityType.WANDERING_TRADER)) {
+            return;
+        }
+
         var villager = (Villager)event.getEntity();
 
         if(villager.getProfession() != Villager.Profession.LIBRARIAN) { return; }
