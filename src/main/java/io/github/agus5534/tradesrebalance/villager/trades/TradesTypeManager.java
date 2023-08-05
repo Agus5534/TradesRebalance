@@ -3,9 +3,10 @@ package io.github.agus5534.tradesrebalance.villager.trades;
 import io.github.agus5534.tradesrebalance.utils.Randomizer;
 import io.github.agus5534.tradesrebalance.villager.VillagerTrade;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Villager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TradesTypeManager {
@@ -51,7 +52,9 @@ public class TradesTypeManager {
 
     public VillagerTrade getRandomTrade() {
         int random = ThreadLocalRandom.current().nextInt(1, 100);
-        /* TODO alpha randomization
+        /*
+            TODO create efficient randomization
+            Actual:
             40% - Level 1
             30% - Level 2
             18% - Level 3
@@ -73,11 +76,7 @@ public class TradesTypeManager {
 
     private VillagerTrade get(int level) {
         if(!levelTrades.containsKey(level)) {
-            if(level == 5) {
-                return get(1);
-            } else {
-                return get(level+1);
-            }
+            return level == 5 ? get(1) : get(level+1);
         }
 
         var list = levelTrades.get(level);

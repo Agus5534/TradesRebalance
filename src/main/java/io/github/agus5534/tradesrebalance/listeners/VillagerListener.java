@@ -1,5 +1,6 @@
 package io.github.agus5534.tradesrebalance.listeners;
 
+import io.github.agus5534.tradesrebalance.villager.VillagerTrade;
 import io.github.agus5534.tradesrebalance.villager.trades.TradesManager;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -7,7 +8,6 @@ import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.VillagerAcquireTradeEvent;
-import org.bukkit.event.entity.VillagerCareerChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -42,26 +42,18 @@ public class VillagerListener implements Listener {
         }
     }
 
-
     public void generateSpecialRecipe(Villager villager, MerchantRecipe recipe) {
         var typeManager = tradesManager.getType(villager);
         var trade = typeManager.getSpecialTrade();
 
-        var cost = ThreadLocalRandom.current().nextInt(trade.min(), trade.max());
-        var rec = new MerchantRecipe(trade.item(), recipe.getUses(), 4, recipe.hasExperienceReward(), recipe.getVillagerExperience(), recipe.getPriceMultiplier());
-        rec.setIngredients(
-                List.of
-                        (
-                                new ItemStack(Material.EMERALD, cost),
-                                new ItemStack(Material.BOOK, 1)
-                        )
-        );
+        var rec = recipe(trade, recipe);
 
         var list = new ArrayList<>(villager.getRecipes());
         list.add(rec);
 
         villager.setRecipes(list);
     }
+
     public MerchantRecipe fixedRecipe(Villager villager, MerchantRecipe recipe) {
         var typeManager = tradesManager.getType(villager);
 
@@ -79,13 +71,20 @@ public class VillagerListener implements Listener {
         }
 
         var randBook = typeManager.getRandomTrade();
-        var cost = ThreadLocalRandom.current().nextInt(randBook.min(), randBook.max());
-        var rec = new MerchantRecipe(randBook.item(), recipe.getUses(), 4, recipe.hasExperienceReward(), recipe.getVillagerExperience(), recipe.getPriceMultiplier());
+
+        return recipe(randBook, recipe);
+    }
+
+
+    private MerchantRecipe recipe(VillagerTrade trade, MerchantRecipe recipe) {
+        var cost = ThreadLocalRandom.current().nextInt(trade.min(), trade.max());
+        var rec = new MerchantRecipe(trade.item(), recipe.getUses(), 4, recipe.hasExperienceReward(), recipe.getVillagerExperience(), recipe.getPriceMultiplier());
         rec.setIngredients(
-                List.of(
-                        new ItemStack(Material.EMERALD, cost),
-                        new ItemStack(Material.BOOK, 1)
-                )
+                List.of
+                        (
+                                new ItemStack(Material.EMERALD, cost),
+                                new ItemStack(Material.BOOK, 1)
+                        )
         );
 
         return rec;

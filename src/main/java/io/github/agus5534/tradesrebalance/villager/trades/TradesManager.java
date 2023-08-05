@@ -5,7 +5,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Villager;
 
 import java.util.ArrayList;
-import java.util.BitSet;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -89,11 +89,11 @@ public class TradesManager {
 
         list.add(special);
 
-        for (Enchantment enchantment : enchantments) {
+        Arrays.stream(enchantments).forEach(enchantment -> {
             for(int i = enchantment.getStartLevel(); i <= enchantment.getMaxLevel() ; i++) {
                 list.add(VillagerTrade.ofEnchantedBook(enchantment, i, false));
             }
-        }
+        });
 
         return list;
     }
