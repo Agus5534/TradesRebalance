@@ -34,6 +34,8 @@ public class Randomizer {
     public static <T> List<T> get(int count, List<T> list) {
         count = Math.abs(count);
 
+        List<T> l = new ArrayList<>(list);
+
         int n = 0;
 
         checkEmpty(list);
@@ -42,8 +44,8 @@ public class Randomizer {
         List<T> returnList = new ArrayList<>();
 
         while (n < count) {
-            T element = get(list);
-            list.remove(element);
+            T element = get(l);
+            l.remove(element);
             returnList.add(element);
 
             n++;

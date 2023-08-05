@@ -1,6 +1,6 @@
 package io.github.agus5534.tradesrebalance.listeners;
 
-import io.github.agus5534.tradesrebalance.villager.VillagerTrade;
+import io.github.agus5534.tradesrebalance.villager.EnchantedBookTrade;
 import io.github.agus5534.tradesrebalance.villager.trades.TradesManager;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -76,7 +76,7 @@ public class VillagerListener implements Listener {
     }
 
 
-    private MerchantRecipe recipe(VillagerTrade trade, MerchantRecipe recipe) {
+    private MerchantRecipe recipe(EnchantedBookTrade trade, MerchantRecipe recipe) {
         var cost = ThreadLocalRandom.current().nextInt(trade.min(), trade.max());
         var rec = new MerchantRecipe(trade.item(), recipe.getUses(), 4, recipe.hasExperienceReward(), recipe.getVillagerExperience(), recipe.getPriceMultiplier());
         rec.setIngredients(

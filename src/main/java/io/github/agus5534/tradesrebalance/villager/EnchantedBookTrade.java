@@ -5,14 +5,14 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
-public class VillagerTrade {
+public class EnchantedBookTrade {
 
     private final ItemStack item;
     private final int priceMin, priceMax;
     private Integer bookLevel;
     private final boolean special;
 
-    private VillagerTrade(ItemStack item, int priceMin, int priceMax, boolean special, Integer bookLevel) {
+    private EnchantedBookTrade(ItemStack item, int priceMin, int priceMax, boolean special, Integer bookLevel) {
         this.item = item;
         this.priceMin = priceMin;
         this.priceMax = priceMax;
@@ -40,21 +40,17 @@ public class VillagerTrade {
         return bookLevel;
     }
 
-    public static VillagerTrade of(ItemStack item, int priceMin, int priceMax, boolean special) {
-        return new VillagerTrade(item, priceMin, priceMax, special, null);
-    }
-
-    public static VillagerTrade ofEnchantedBook(Enchantment enchantment, int level, int priceMin, int priceMax, boolean special) {
+    public static EnchantedBookTrade ofEnchantedBook(Enchantment enchantment, int level, int priceMin, int priceMax, boolean special) {
         var item = new ItemStack(Material.ENCHANTED_BOOK,1);
         var meta = (EnchantmentStorageMeta)item.getItemMeta();
 
         meta.addStoredEnchant(enchantment, level, false);
         item.setItemMeta(meta);
 
-        return new VillagerTrade(item, priceMin, priceMax, special, level);
+        return new EnchantedBookTrade(item, priceMin, priceMax, special, level);
     }
 
-    public static VillagerTrade ofEnchantedBook(Enchantment enchantment, int level, boolean special) {
+    public static EnchantedBookTrade ofEnchantedBook(Enchantment enchantment, int level, boolean special) {
         var item = new ItemStack(Material.ENCHANTED_BOOK,1);
         var meta = (EnchantmentStorageMeta)item.getItemMeta();
 
@@ -86,6 +82,6 @@ public class VillagerTrade {
             }
         }
 
-        return new VillagerTrade(item, priceMin, priceMax, special, level);
+        return new EnchantedBookTrade(item, priceMin, priceMax, special, level);
     }
 }

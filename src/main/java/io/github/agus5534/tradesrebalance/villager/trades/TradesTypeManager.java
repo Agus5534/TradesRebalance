@@ -1,7 +1,7 @@
 package io.github.agus5534.tradesrebalance.villager.trades;
 
 import io.github.agus5534.tradesrebalance.utils.Randomizer;
-import io.github.agus5534.tradesrebalance.villager.VillagerTrade;
+import io.github.agus5534.tradesrebalance.villager.EnchantedBookTrade;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.ArrayList;
@@ -11,34 +11,34 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class TradesTypeManager {
 
-    private final List<VillagerTrade> normalTrades;
-    private final VillagerTrade specialTrade;
+    private final List<EnchantedBookTrade> normalTrades;
+    private final EnchantedBookTrade specialTrade;
     private final List<Enchantment> enchantments;
 
-    private final HashMap<Integer, List<VillagerTrade>> levelTrades;
-    public TradesTypeManager(List<VillagerTrade> tradeList) {
-        this.normalTrades = tradeList.stream().filter(villagerTrade ->!villagerTrade.isSpecial()).toList();
-        this.specialTrade = tradeList.stream().filter(VillagerTrade::isSpecial).findFirst().orElse(normalTrades.get(0));
+    private final HashMap<Integer, List<EnchantedBookTrade>> levelTrades;
+    public TradesTypeManager(List<EnchantedBookTrade> tradeList) {
+        this.normalTrades = tradeList.stream().filter(enchantedBookTrade ->!enchantedBookTrade.isSpecial()).toList();
+        this.specialTrade = tradeList.stream().filter(EnchantedBookTrade::isSpecial).findFirst().orElse(normalTrades.get(0));
         this.levelTrades = new HashMap<>();
         this.enchantments = new ArrayList<>();
 
 
-        tradeList.forEach(villagerTrade -> {
-            enchantments.addAll(villagerTrade.item().getEnchantments().keySet());
+        tradeList.forEach(enchantedBookTrade -> {
+            enchantments.addAll(enchantedBookTrade.item().getEnchantments().keySet());
 
-            if(levelTrades.get(villagerTrade.bookLevel()) == null) {
-                levelTrades.put(villagerTrade.bookLevel(), List.of(villagerTrade));
+            if(levelTrades.get(enchantedBookTrade.bookLevel()) == null) {
+                levelTrades.put(enchantedBookTrade.bookLevel(), List.of(enchantedBookTrade));
                 return;
             }
 
-            var list = new ArrayList<>(levelTrades.get(villagerTrade.bookLevel()));
-            list.add(villagerTrade);
+            var list = new ArrayList<>(levelTrades.get(enchantedBookTrade.bookLevel()));
+            list.add(enchantedBookTrade);
 
-            levelTrades.replace(villagerTrade.bookLevel(), list);
+            levelTrades.replace(enchantedBookTrade.bookLevel(), list);
         });
     }
 
-    public List<VillagerTrade> getNormalTrades() {
+    public List<EnchantedBookTrade> getNormalTrades() {
         return normalTrades;
     }
 
@@ -46,11 +46,11 @@ public class TradesTypeManager {
         return enchantments.contains(enchantment);
     }
 
-    public VillagerTrade getSpecialTrade() {
+    public EnchantedBookTrade getSpecialTrade() {
         return specialTrade;
     }
 
-    public VillagerTrade getRandomTrade() {
+    public EnchantedBookTrade getRandomTrade() {
         int random = ThreadLocalRandom.current().nextInt(1, 100);
         /*
             TODO create efficient randomization
@@ -74,13 +74,13 @@ public class TradesTypeManager {
         }
     }
 
-    private VillagerTrade get(int level) {
+    private EnchantedBookTrade get(int level) {
         if(!levelTrades.containsKey(level)) {
             return level == 5 ? get(1) : get(level+1);
         }
 
         var list = levelTrades.get(level);
-        list = list.stream().filter(villagerTrade -> !villagerTrade.isSpecial()).toList();
+        list = list.stream().filter(enchantedBookTrade -> !enchantedBookTrade.isSpecial()).toList();
         return Randomizer.get(list);
     }
 
