@@ -4,6 +4,8 @@ import io.github.agus5534.tradesrebalance.villager.VillagerTrade;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Villager;
 
+import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,109 +29,72 @@ public class TradesManager {
     private void configEnchantments() {
         tradeHashMap.put(
                 Villager.Type.DESERT,
-                List.of(
-                        VillagerTrade.ofEnchantedBook(Enchantment.ARROW_INFINITE, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.THORNS, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.THORNS, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.THORNS, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_FIRE, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_FIRE, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_FIRE, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DIG_SPEED, 3, true)
+                enchantmentTrades(
+                        VillagerTrade.ofEnchantedBook(Enchantment.DIG_SPEED, 3, true),
+                        Enchantment.ARROW_INFINITE, Enchantment.THORNS, Enchantment.PROTECTION_FIRE
                 )
         );
 
         tradeHashMap.put(
                 Villager.Type.JUNGLE,
-                List.of(
-                        VillagerTrade.ofEnchantedBook(Enchantment.ARROW_DAMAGE, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.ARROW_DAMAGE, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.ARROW_DAMAGE, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.ARROW_DAMAGE, 4, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.ARROW_DAMAGE, 5, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_PROJECTILE, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_PROJECTILE, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_PROJECTILE, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_PROJECTILE, 4, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_FALL, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_FALL, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_FALL, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_FALL, 4, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DURABILITY, 2, true)
+                enchantmentTrades(
+                        VillagerTrade.ofEnchantedBook(Enchantment.DURABILITY, 2, true),
+                        Enchantment.ARROW_DAMAGE, Enchantment.PROTECTION_PROJECTILE, Enchantment.PROTECTION_FALL
                 )
         );
 
         tradeHashMap.put(
                 Villager.Type.PLAINS,
-                List.of(
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_ARTHROPODS, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_ARTHROPODS, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_ARTHROPODS, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_ARTHROPODS, 4, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_ARTHROPODS, 5, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_UNDEAD, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_UNDEAD, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_UNDEAD, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_UNDEAD, 4, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_UNDEAD, 5, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.ARROW_KNOCKBACK, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.ARROW_KNOCKBACK, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true)
+                enchantmentTrades(
+                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_ENVIRONMENTAL, 3, true),
+                        Enchantment.DAMAGE_ARTHROPODS, Enchantment.DAMAGE_UNDEAD, Enchantment.ARROW_KNOCKBACK
                 )
         );
 
         tradeHashMap.put(
                 Villager.Type.SAVANNA,
-                List.of(
-                        VillagerTrade.ofEnchantedBook(Enchantment.SWEEPING_EDGE, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.SWEEPING_EDGE, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.SWEEPING_EDGE, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.BINDING_CURSE, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.KNOCKBACK, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.KNOCKBACK, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_ALL, 3, true)
+                enchantmentTrades(
+                        VillagerTrade.ofEnchantedBook(Enchantment.DAMAGE_ALL, 3, true),
+                        Enchantment.SWEEPING_EDGE, Enchantment.BINDING_CURSE, Enchantment.KNOCKBACK
                 )
         );
 
         tradeHashMap.put(
                 Villager.Type.SNOW,
-                List.of(
-                        VillagerTrade.ofEnchantedBook(Enchantment.FROST_WALKER, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.FROST_WALKER, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.LOOT_BONUS_MOBS, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.LOOT_BONUS_MOBS, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.LOOT_BONUS_MOBS, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.WATER_WORKER, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.SILK_TOUCH, 1, true)
+                enchantmentTrades(
+                        VillagerTrade.ofEnchantedBook(Enchantment.SILK_TOUCH, 1, true),
+                        Enchantment.FROST_WALKER, Enchantment.LOOT_BONUS_MOBS, Enchantment.WATER_WORKER
                 )
         );
 
         tradeHashMap.put(
                 Villager.Type.SWAMP,
-                List.of(
-                        VillagerTrade.ofEnchantedBook(Enchantment.VANISHING_CURSE, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.OXYGEN, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.OXYGEN, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.OXYGEN, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DEPTH_STRIDER, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DEPTH_STRIDER, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.DEPTH_STRIDER, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.MENDING, 1, true)
+                enchantmentTrades(
+                        VillagerTrade.ofEnchantedBook(Enchantment.MENDING, 1, true),
+                        Enchantment.VANISHING_CURSE, Enchantment.OXYGEN, Enchantment.DEPTH_STRIDER
                 )
         );
 
         tradeHashMap.put(
                 Villager.Type.TAIGA,
-                List.of(
-                        VillagerTrade.ofEnchantedBook(Enchantment.ARROW_FIRE, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.FIRE_ASPECT, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.FIRE_ASPECT, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_EXPLOSIONS, 1, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_EXPLOSIONS, 2, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_EXPLOSIONS, 3, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.PROTECTION_EXPLOSIONS, 4, false),
-                        VillagerTrade.ofEnchantedBook(Enchantment.LOOT_BONUS_BLOCKS, 2, true)
+                enchantmentTrades(
+                        VillagerTrade.ofEnchantedBook(Enchantment.LOOT_BONUS_BLOCKS, 2, true),
+                        Enchantment.ARROW_FIRE, Enchantment.FIRE_ASPECT, Enchantment.PROTECTION_EXPLOSIONS
                 )
         );
+    }
+
+    private List<VillagerTrade> enchantmentTrades(VillagerTrade special, Enchantment... enchantments) {
+        var list = new ArrayList<VillagerTrade>();
+
+        list.add(special);
+
+        for (Enchantment enchantment : enchantments) {
+            for(int i = enchantment.getStartLevel(); i <= enchantment.getMaxLevel() ; i++) {
+                list.add(VillagerTrade.ofEnchantedBook(enchantment, i, false));
+            }
+        }
+
+        return list;
     }
 }
