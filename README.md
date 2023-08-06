@@ -8,4 +8,4 @@ Uses Spigot software.
 ## To Do List
 - [X] Librarians updated
 - [ ] Better Librarian randomization
-- [ ] Wandering Traders Updated
+- [X] Wandering Traders Updated
