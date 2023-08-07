@@ -216,7 +216,7 @@ public class WanderingListener implements Listener {
         tradeList.add(
                 WanderingBuyTrade.of(
                         new ItemStack(Material.EMERALD, 2),
-                        1, new ItemStack(Material.BUCKET), null, false
+                        1, new ItemStack(Material.WATER_BUCKET), null, false
 
                 )
         );
